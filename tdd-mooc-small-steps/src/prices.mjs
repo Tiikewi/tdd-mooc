@@ -1,5 +1,6 @@
 import "./polyfills.mjs";
 import express from "express";
+import { Temporal } from "@js-temporal/polyfill";
 
 const convert = (date) => {
   if (date instanceof Date) {
@@ -90,6 +91,7 @@ function createApp(database) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
+      let holiday2 = convert(holiday);
       if (
         date &&
         date2 &&
