@@ -30,11 +30,11 @@ function createApp(database) {
     }
   }
 
-  function calculateCost(age, type, baseCost, date2) {
+  function calculateCost(age, type, baseCost, date) {
     if (type === "night") {
       return calculateCostForNightTicket(age, baseCost);
     } else {
-      return calculateCostForDayTicket(age, baseCost, date2);
+      return calculateCostForDayTicket(age, baseCost, date);
     }
   }
 
@@ -51,8 +51,8 @@ function createApp(database) {
     return baseCost;
   }
 
-  function calculateCostForDayTicket(age, baseCost, date2) {
-    let reduction = calculateReduction(date2);
+  function calculateCostForDayTicket(age, baseCost, date) {
+    let reduction = calculateReduction(date);
     if (age === undefined) {
       return Math.ceil(baseCost * (1 - reduction / 100));
     }
@@ -68,16 +68,16 @@ function createApp(database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date2) {
+  function calculateReduction(date) {
     let reduction = 0;
-    if (date2 && isMonday(date2) && !isHoliday(date2)) {
+    if (date && isMonday(date) && !isHoliday(date)) {
       reduction = 35;
     }
     return reduction;
   }
 
-  function isMonday(date2) {
-    return date2.dayOfWeek === 1;
+  function isMonday(date) {
+    return date.dayOfWeek === 1;
   }
 
   function isHoliday(date) {
