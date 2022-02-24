@@ -76,7 +76,7 @@ function createApp(database) {
 
   function calculateReduction(date, date2) {
     let reduction = 0;
-    if (date && isMonday(date) && isMonday2(date2) && !isHoliday(date)) {
+    if (date && isMonday(date) && isMonday2(date2) && !isHoliday(date, date2)) {
       reduction = 35;
     }
     return reduction;
@@ -89,7 +89,7 @@ function createApp(database) {
     return date2.dayOfWeek === 1;
   }
 
-  function isHoliday(date) {
+  function isHoliday(date, date2) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
@@ -97,7 +97,8 @@ function createApp(database) {
         date &&
         date.getFullYear() === holiday.getFullYear() &&
         date.getMonth() === holiday.getMonth() &&
-        date.getDate() === holiday.getDate()
+        date.getDate() === holiday.getDate() &&
+        date2.day === holiday.getDate()
       ) {
         return true;
       }
