@@ -1,6 +1,12 @@
 import "./polyfills.mjs";
 import express from "express";
 
+const convert = (date) => {
+  if (date instanceof Date) {
+    return date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
+  } else return date;
+};
+
 // Refactor the following code to get rid of the legacy Date class.
 // Use Temporal.PlainDate instead. See /test/date_conversion.spec.mjs for examples.
 
@@ -19,6 +25,7 @@ function createApp(database) {
     const type = req.query.type;
     const baseCost = database.findBasePriceByType(type).cost;
     const date = parseDate(req.query.date);
+    const date2 = convert(parseDate(req.query.date));
     const cost = calculateCost(age, type, date, baseCost);
     res.json({ cost });
   });
