@@ -28,6 +28,7 @@ export class Board {
   }
 
   drop(block) {
+    if (this.falling) throw "already falling";
     this.block = block;
     this.falling = true;
   }
