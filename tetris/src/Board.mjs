@@ -31,4 +31,8 @@ export class Board {
     this.block = block;
     this.falling = true;
   }
+
+  tick() {
+    this.dropRow += 1;
+  }
 }
