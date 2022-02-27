@@ -6,6 +6,8 @@ export class Board {
     this.width = width;
     this.height = height;
     this.falling = false;
+    this.block = null;
+    this.dropRow = 0;
   }
 
   toString() {
@@ -14,8 +16,8 @@ export class Board {
 
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
-        if (col === 1 && row === 0 && this.falling) {
-          string += "X";
+        if (col === 1 && row === this.dropRow && this.falling) {
+          string += this.block.color;
         } else {
           string += BOARD_MARKER;
         }
@@ -25,7 +27,8 @@ export class Board {
     return string;
   }
 
-  drop() {
+  drop(block) {
+    this.block = block;
     this.falling = true;
   }
 }
