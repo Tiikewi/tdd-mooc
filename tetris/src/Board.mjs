@@ -18,17 +18,16 @@ export class Board {
       for (let col = 0; col < this.width; col++) {
         if (col === 1 && row === this.dropRow && this.falling) {
           this.boardState[row][col] = this.block.color;
-        } else {
-          this.boardState[row][col] = this.EMPTY;
         }
       }
     }
-    const joinedState = this.boardState
+    // Make string of boardState array and add line break to the end
+    const stateAsString = this.boardState
       .map((e) => e.join(""))
       .join("\n")
       .concat("\n");
 
-    return joinedState;
+    return stateAsString;
   }
 
   drop(block) {
