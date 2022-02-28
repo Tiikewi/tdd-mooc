@@ -5,13 +5,15 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.EMPTY = ".";
+    this.boardState = Array(height);
     this.falling = false;
     this.block = null;
     this.dropRow = 0;
+    this.initBoard();
   }
 
   toString() {
-    const BOARD_MARKER = ".";
     let string = "";
 
     for (let row = 0; row < this.height; row++) {
@@ -19,7 +21,7 @@ export class Board {
         if (col === 1 && row === this.dropRow && this.falling) {
           string += this.block.color;
         } else {
-          string += BOARD_MARKER;
+          string += this.EMPTY;
         }
       }
       string += "\n";
@@ -37,5 +39,14 @@ export class Board {
   }
   hasFalling() {
     return this.falling;
+  }
+
+  initBoard() {
+    this.boardState.fill(
+      Array(this.width).fill(this.EMPTY, 0, this.width),
+      0,
+      this.height
+    );
+    console.log("after init: ", this.boardState);
   }
 }
