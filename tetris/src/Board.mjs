@@ -20,12 +20,22 @@ export class Board {
       for (let col = 0; col < this.width; col++) {
         if (col === 1 && row === this.dropRow && this.falling) {
           string += this.block.color;
+          this.boardState[row][col] = this.block.color;
+
+          console.log("col:", col, "row:", row);
+          console.log("state", this.boardState);
         } else {
           string += this.EMPTY;
         }
       }
       string += "\n";
     }
+    const joinedState = this.boardState
+      .map((e) => e.join(""))
+      .join("\n")
+      .concat("\n");
+
+    console.log("joined:", joinedState);
     return string;
   }
 
@@ -42,11 +52,12 @@ export class Board {
   }
 
   initBoard() {
-    this.boardState.fill(
-      Array(this.width).fill(this.EMPTY, 0, this.width),
-      0,
-      this.height
-    );
-    console.log("after init: ", this.boardState);
+    for (let index = 0; index < this.height; index++) {
+      this.boardState[index] = Array(this.width).fill(
+        this.EMPTY,
+        0,
+        this.width
+      );
+    }
   }
 }

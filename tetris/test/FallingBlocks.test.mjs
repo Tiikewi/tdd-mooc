@@ -46,7 +46,7 @@ describe("Falling blocks", () => {
       expect(after).to.equal(before);
     });
   });
-
+  /*
   describe("When a block reaches the bottom", () => {
     beforeEach(() => {
       board.drop(new Block("X"));
@@ -66,7 +66,7 @@ describe("Falling blocks", () => {
       ).to.be.true;
     });
 
-    xit("it stops when it hits the bottom", () => {
+    it("it stops when it hits the bottom", () => {
       board.tick();
 
       expect(board.toString()).to.equalShape(
