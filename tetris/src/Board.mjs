@@ -14,29 +14,21 @@ export class Board {
   }
 
   toString() {
-    let string = "";
-
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
         if (col === 1 && row === this.dropRow && this.falling) {
-          string += this.block.color;
           this.boardState[row][col] = this.block.color;
-
-          console.log("col:", col, "row:", row);
-          console.log("state", this.boardState);
         } else {
-          string += this.EMPTY;
+          this.boardState[row][col] = this.EMPTY;
         }
       }
-      string += "\n";
     }
     const joinedState = this.boardState
       .map((e) => e.join(""))
       .join("\n")
       .concat("\n");
 
-    console.log("joined:", joinedState);
-    return string;
+    return joinedState;
   }
 
   drop(block) {
