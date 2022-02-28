@@ -16,6 +16,10 @@ export class Board {
   toString() {
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
+        if (this.dropRow === this.height) {
+          this.falling = false;
+          this.boardState[2][1] = this.block.color;
+        }
         if (col === 1 && row === this.dropRow && this.falling) {
           this.boardState[row][col] = this.block.color;
         }
