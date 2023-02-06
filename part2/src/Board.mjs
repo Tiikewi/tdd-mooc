@@ -13,10 +13,8 @@ export class Board {
   }
 
   initBoard() {
-    let row = Array(this.width).fill(EMPTY_MARK)
-    
-    this.board = Array(this.height).fill(row)
-
+    // init board with rows with new reference.
+    this.board = Array.from({length: this.height}, _ => (new Array(this.width).fill(EMPTY_MARK)))
   }
 
   toString() {
@@ -27,13 +25,11 @@ export class Board {
       stringBoard.push(row2.join(""))
     });
 
-
-
-    
     return stringBoard.join("")
   }
 
   drop(block) {
-
+    this.board[0][1] = "X"
+    console.log("BOARD:", this.board)
   }
 }
