@@ -14,17 +14,26 @@ export class Board {
 
   initBoard() {
     let row = Array(this.width).fill(EMPTY_MARK)
-    row.push('\n')
     
-    // use join so there are no commas
-    this.board = Array(this.height).fill(row.join(""))
+    this.board = Array(this.height).fill(row)
+
   }
 
   toString() {
-    return this.board.join("");
+    let stringBoard = []
+
+    this.board.forEach(row => {
+      const row2 = row.concat('\n')
+      stringBoard.push(row2.join(""))
+    });
+
+
+
+    
+    return stringBoard.join("")
   }
 
   drop(block) {
-    
+
   }
 }
