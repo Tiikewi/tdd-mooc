@@ -31,4 +31,10 @@ export class Board {
   drop(block) {
     this.board[0][Math.floor(this.width / 2)] = block.color
   }
+
+  tick() {
+    this.board.pop()
+    const row = new Array(this.width).fill(EMPTY_MARK)
+    this.board.unshift(row)
+  }
 }
