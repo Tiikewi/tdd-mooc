@@ -48,6 +48,10 @@ export class Board {
       this.isFalling = false
       return
     }
+    if (this.board[this.fallingBlockRow + 1][1] !== EMPTY_MARK) {
+      this.isFalling = false
+      return
+    }
     const fallingRow = this.board[this.fallingBlockRow]
     this.fallingBlockRow += 1
 
