@@ -5,11 +5,13 @@ export class Board {
   height;
   board;
   isFalling;
+  fallingBlockRow;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.isFalling = false;
+    this.fallingBlockRow = null
 
     this.initBoard();
   }
@@ -34,15 +36,25 @@ export class Board {
 
   drop(block) {
     if (this.isFalling === true) throw new Error("already falling")
+
+    this.fallingBlockRow = 0
     
     this.isFalling = true
     this.board[0][Math.floor(this.width / 2)] = block.color;
   }
 
   tick() {
-    this.board.pop();
-    const row = new Array(this.width).fill(EMPTY_MARK);
-    this.board.unshift(row);
+    if (this.fallingBlockRow >= this.height - 1) {
+      this.isFalling = false
+      return
+    }
+    const fallingRow = this.board[this.fallingBlockRow]
+    this.fallingBlockRow += 1
+
+    this.board[this.fallingBlockRow] = fallingRow
+    this.board[this.fallingBlockRow - 1] = new Array(this.width).fill(EMPTY_MARK)
+
+    
   }
 
   hasFalling() {
