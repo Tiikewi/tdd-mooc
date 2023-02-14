@@ -44,4 +44,8 @@ export class Board {
     const row = new Array(this.width).fill(EMPTY_MARK);
     this.board.unshift(row);
   }
+
+  hasFalling() {
+    return this.isFalling
+  }
 }
